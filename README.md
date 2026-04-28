@@ -22,7 +22,7 @@ Using `run_project.m`, the system extracts high-dimensional data from the simula
 ### 3. Machine Learning Architecture
 We implemented a **Multi-class SVM (Support Vector Machine)** using a One-vs-One approach with an **RBF Kernel**.
 - **Normalization:** Z-score scaling was applied to handle the varying magnitudes of voltage and current.
-- **Validation:** Performance was verified using Confusion Matrices and ROC Curves, achieving near 100% classification accuracy.
+- **Validation:** Performance was verified using Confusion Matrices and ROC Curves, achieving 95% classification accuracy.
 
 ## 🧠 Engineering Insights (From My Technical Notes)
 During development, I resolved several critical hardware-software integration issues:
