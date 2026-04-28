@@ -35,15 +35,9 @@ During development, I addressed several high-level technical challenges:
     * **Vs. Neural Networks:** Given the structured dataset with 3 features, SVM provides a clear mathematical margin without the "overkill" and training overhead of Deep Learning.
 * **Realistic Simulation:** Chose a 0.9 $\Omega$ fault resistance to model **early-stage wear-and-tear** rather than a catastrophic short-circuit, which is the core of "Predictive" maintenance.
 
-## 📂 Repository Structure
-- `/Scripts`: MATLAB code for automated simulation and ML training.
-- `/Model`: Simulink `.slx` file and circuit architecture images.
-- `/Dataset`: Generated `Final_Dataset.csv` containing labeled fault classes.
-- `/Docs`: Full Project Report and End-Sem Synopsis.
-
 ## 📊 Results
 The system achieved high classification accuracy, successfully distinguishing between Healthy, Capacitor-Faulty, and MOSFET-Faulty states, validated through Confusion Matrices and ROC Curves.
 
 ## 👥 Team
-- **Yash Srivastava** (Lead Developer)
+- **Yash Srivastava** 
 - **Md Nawaz Alam**
