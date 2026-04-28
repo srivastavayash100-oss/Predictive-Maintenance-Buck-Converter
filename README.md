@@ -37,7 +37,7 @@ The Multi-class SVM model was validated using a Confusion Matrix. The model achi
 ![SVM Confusion Matrix](confusion_matrix.png)
 
 
-## 🧠 Critical Engineering Insights (From My Notes)
+## 🧠 Critical Engineering Insights 
 During development, I addressed several high-level technical challenges:
 
 * **Thermal-Electrical Isolation:** Resolved MOSFET Junction Temperature ($T_j$) convergence errors by fixing it at 25°C. This ensures the model learns purely from *electrical degradation* signatures rather than thermal noise.
