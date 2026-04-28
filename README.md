@@ -1,33 +1,26 @@
 # Predictive Maintenance of a Power Converter Using Electrical Signal Features and Machine Learning in MATLAB
 
-## 📌 Project Overview
-This project is part of my **Minor Project - 2 (Semester VI)** at JIIT. It focuses on the intelligent fault diagnosis of a DC-DC Buck Converter. By integrating **Simulink-based physical modeling** with **Multi-class SVM classification**, the system identifies early-stage degradation in MOSFETs and Electrolytic Capacitors.
+## 📌 Project Context
+Developed as **Minor Project - 2 (Semester VI)** at JIIT Noida, under the supervision of **Dr. Ankur Bhardwaj**. This project focuses on moving from reactive to predictive maintenance in industrial power electronics.
 
-## 🛠️ Technical Architecture
-### 1. Physical Modeling (Simulink)
-- **Converter:** Closed-loop Buck Converter.
-- **Solver:** **Powergui (Discrete/Tustin)** to resolve algebraic loops and optimize simulation speed.
-- **Fault Injection:** - **Capacitor Fault:** Increasing ESR (Equivalent Series Resistance).
-    - **MOSFET Fault:** Varying Drain-Source 'On' Resistance ($R_{ds(on)}$).
+## 🛠️ Technical Solution & Notes
+### 1. The Simulation Environment (Simulink)
+- **Closed-Loop Buck Converter:** Designed to simulate real-world hardware behavior.
+- **Tustin Solver Optimization:** To handle switching frequencies and resolve **Algebraic Loops**, I implemented the Discrete/Tustin solver via the Powergui block.
+- **Thermal Fix:** Fixed the MOSFET Junction Temperature ($T_j$) at 25°C using `assignin` logic. This was crucial to isolate electrical degradation ($R_{ds(on)}$) from thermal fluctuations.
 
-### 2. Data Engineering (`run_project.m`)
-The model extracts three key electrical signatures:
-- **$V_{mean}$:** Average output voltage.
-- **$I_{rms}$:** Root Mean Square of the drain current ($I_d$).
-- **$V_{pp}$:** Peak-to-Peak voltage ripple (indicator of capacitor health).
+### 2. Fault Classification Logic
+The system identifies three distinct states based on feature extraction:
+- **Healthy:** Nominal operation.
+- **Capacitor Fault:** Detected via high **$V_{pp}$ (Voltage Ripple)** due to increased ESR.
+- **MOSFET Fault:** Detected via abnormal **$I_{rms}$** and **$V_{mean}$** signatures.
 
-### 3. Machine Learning (`train_svm.m`)
-- **Algorithm:** Multi-class SVM (One-vs-One).
-- **Kernel:** RBF (Radial Basis Function).
-- **Metric:** Achieved high accuracy with robust validation via Confusion Matrix and ROC Curves.
+### 3. Why SVM? (Technical Reasoning)
+Based on my analysis, SVM was chosen over other algorithms because:
+- **Vs. KNN:** SVM is more efficient for **Edge Computing** as it doesn't need to store the entire training set for inference.
+- **Vs. Neural Networks:** With only 3-4 features, a Deep Learning model would be "overkill." SVM provides a clear mathematical margin with better interpretability.
+- **Vs. Decision Trees:** SVM with an **RBF Kernel** is more robust to the switching noise inherent in Simulink models.
 
-## 🚀 Engineering Challenges Solved
-- **Thermal Convergence:** Fixed MOSFET Junction Temperature ($T_j$) at 25°C using `assignin` to isolate electrical degradation from thermal noise.
-- **Simulation Stability:** Implemented a Tustin solver to eliminate algebraic loop errors during high-speed data generation.
-- **Early Detection:** Specifically modeled small fault resistances (0.9 $\Omega$) to detect "degradation" rather than "failure."
-
-## 📊 Results
-The model effectively distinguishes between:
-1. **Healthy State**
-2. **Capacitor Fault**
-3. **MOSFET Fault**
+## 🚀 Key Engineering Challenges
+- **Simulation Convergence:** Resolved errors where `sim_out` was returning empty data by fixing signal logging formats.
+- **Early-Stage Detection:** Modeled a 0.9 $\Omega$ fault resistance to simulate degradation before a total short-circuit occurs.
