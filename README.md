@@ -26,6 +26,18 @@ The system extracts high-dimensional electrical signatures from raw simulation d
 - **Kernel:** RBF (Radial Basis Function) to handle inherent switching noise.
 - **Preprocessing:** Z-score normalization for feature scaling.
 
+### 🛠️ System Architecture
+The heart of the project is a high-fidelity DC-DC Buck Converter designed in Simulink. It features a closed-loop control system and specific fault injection blocks for Capacitor ESR and MOSFET resistance.
+
+![Simulink Model Architecture](simulink_model.png)
+*Figure 1: High-fidelity Buck Converter design in Simulink using Tustin Solver*
+
+### 📊 Performance Evaluation
+The Multi-class SVM model was validated using a Confusion Matrix. The model achieved near 100% accuracy in distinguishing between Healthy, Capacitor-Faulty, and MOSFET-Faulty states.
+
+![SVM Confusion Matrix](confusion_matrix.png)
+*Figure 2: Classification results showing perfect separation between health states*
+
 ## 🧠 Critical Engineering Insights (From My Notes)
 During development, I addressed several high-level technical challenges:
 
